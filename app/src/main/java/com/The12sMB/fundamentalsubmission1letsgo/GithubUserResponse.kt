@@ -100,3 +100,14 @@ data class GithubUserResponse(
 	@field:SerializedName("node_id")
 	val nodeId: String
 )
+
+data class GithubUserSearchResponse (
+	@field:SerializedName("total_count")
+	val totalCount: Int,
+
+	@field:SerializedName("incomplete_results")
+	val incompleteResults: Boolean,
+
+	@field:SerializedName("items")
+	val items: List<GithubUserResponse>
+)
