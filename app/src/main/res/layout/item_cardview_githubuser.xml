@@ -42,13 +42,13 @@
                 tools:text="Username"
                 />
             <TextView
-                android:id="@+id/tv_nama"
+                android:id="@+id/tv_htmlurl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="2dp"
                 android:ellipsize="end"
-                tools:text="Nama"
+                tools:text="url"
                 />
         </LinearLayout>
 

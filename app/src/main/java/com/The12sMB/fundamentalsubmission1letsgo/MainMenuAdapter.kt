@@ -16,7 +16,7 @@ class MainMenuAdapter(private val listGithubUser: List<GithubUserResponse>) :
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imgGithubuserPhoto: ImageView = view.findViewById(R.id.githubuser_profile)
         val tvUsername: TextView = view.findViewById(R.id.tv_username)
-        val tvNama: TextView = view.findViewById(R.id.tv_nama)
+        val tvUrl: TextView = view.findViewById(R.id.tv_htmlurl)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) =
@@ -25,11 +25,16 @@ class MainMenuAdapter(private val listGithubUser: List<GithubUserResponse>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val users = listGithubUser[position]
         holder.tvUsername.text = users.login
-        holder.tvNama.text = users.htmlUrl
-//        Glide.with(holder.itemView.context)
-//            .load(users.avatarUrl)
-//            .circleCrop()
-//            .into(holder.imgPhoto)
+        holder.tvUrl.text = users.htmlUrl
+        Glide.with(holder.itemView.context)
+            .load(users.avatarUrl)
+            .into(holder.imgGithubuserPhoto)
+
+        holder.itemView.setOnClickListener(){
+            val intentDetail = Intent(holder.itemView.context, DetailActivity::class.java)
+            intentDetail.putExtra(DetailActivity.EXTRA_LOGIN, users.login)//intent data login
+            holder.itemView.context.startActivity(intentDetail)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -1,9 +1,14 @@
 package com.The12sMB.fundamentalsubmission1letsgo
 
+import android.app.SearchManager
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
+//        supportActionBar?.hide()
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvContent.layoutManager = layoutManager
@@ -33,10 +38,33 @@ class MainActivity : AppCompatActivity() {
             binding.rvContent.adapter = showRecyclerView(items)
         }
 
-
         mainViewModel.isLoading.observe(this) {
             showLoading(it)
         }
+    }
+    //search fitur
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.option_menu, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu.findItem(R.id.search).actionView as SearchView
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.queryHint = resources.getString(R.string.search_hint)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                Toast.makeText(this@MainActivity, query, Toast.LENGTH_SHORT).show()
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+        return true
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -56,4 +84,6 @@ class MainActivity : AppCompatActivity() {
 
         return MainMenuAdapter(userList)
     }
+
+
 }
