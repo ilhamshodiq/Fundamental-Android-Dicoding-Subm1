@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.The12sMB.fundamentalsubmission1letsgo.databinding.ActivityMainBinding
@@ -26,8 +25,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        supportActionBar?.hide()
-
         val layoutManager = LinearLayoutManager(this)
         binding.rvContent.layoutManager = layoutManager
 
@@ -41,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.isLoading.observe(this) {
             showLoading(it)
         }
+
+        supportActionBar?.title = "Github User App"
     }
     //search fitur
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -57,6 +56,8 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 Toast.makeText(this@MainActivity, query, Toast.LENGTH_SHORT).show()
                 searchView.clearFocus()
+
+                mainViewModel.searchGithubUser(query)
                 return true
             }
 
@@ -79,6 +80,7 @@ class MainActivity : AppCompatActivity() {
         val userList = ArrayList<GithubUserResponse>()
 
         list?.let {
+            userList.clear()
             userList.addAll(it)
         }
 
