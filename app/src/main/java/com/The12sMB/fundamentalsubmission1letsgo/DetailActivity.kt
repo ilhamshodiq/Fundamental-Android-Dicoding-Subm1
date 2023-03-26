@@ -74,6 +74,8 @@ class DetailActivity : AppCompatActivity() {
         binding.tvName.text = item.name
         binding.tvCompany.text = item.company
         binding.tvLocation.text = item.location
+        binding.tvFollower.text = item.followers.toString()
+        binding.tvFollowing.text = item.following.toString()
         Glide.with(this)
             .load(item.avatarUrl)
             .into(binding.civProfile)

@@ -4,4 +4,6 @@
     <string name="search_hint">Cari Github User!</string>
     <string name="tab_text_1">Follower</string>
     <string name="tab_text_2">Following</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
 </resources>
