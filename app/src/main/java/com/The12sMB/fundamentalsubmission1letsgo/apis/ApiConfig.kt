@@ -1,7 +1,6 @@
 package com.The12sMB.fundamentalsubmission1letsgo.apis
 
-import android.annotation.SuppressLint
-import androidx.viewbinding.BuildConfig
+import com.The12sMB.fundamentalsubmission1letsgo.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,8 +18,9 @@ class ApiConfig {
             //authInterceptor
             val authInterceptor = Interceptor { chain ->
                 val req = chain.request()
+                val mySuperScretKey = BuildConfig.KEY
                 val requestHeaders = req.newBuilder()
-                    .addHeader("Authorization", "token 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")
+                    .addHeader("Authorization", mySuperScretKey)
                     .build()
                 chain.proceed(requestHeaders)
             }
