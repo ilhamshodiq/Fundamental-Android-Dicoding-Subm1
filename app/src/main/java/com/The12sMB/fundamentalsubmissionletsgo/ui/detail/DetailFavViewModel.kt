@@ -9,7 +9,7 @@ import com.The12sMB.fundamentalsubmissionletsgo.repository.FavUserRepository
 class DetailFavViewModel(application: Application) : ViewModel() {
     private val mFavoriteUserRepository: FavUserRepository =
         FavUserRepository(application)
-
+    fun getAllFavUser(): LiveData<List<FavoriteUser>> = mFavoriteUserRepository.getAllFavUser()
     fun isFav(userId: String): LiveData<Boolean> =
         mFavoriteUserRepository.isFav(userId)
 

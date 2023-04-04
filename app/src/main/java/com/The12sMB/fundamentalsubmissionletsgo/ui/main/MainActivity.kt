@@ -10,19 +10,29 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.The12sMB.fundamentalsubmissionletsgo.GithubUserResponse
 import com.The12sMB.fundamentalsubmissionletsgo.R
 import com.The12sMB.fundamentalsubmissionletsgo.databinding.ActivityMainBinding
 import com.The12sMB.fundamentalsubmissionletsgo.ui.favorite.FavoriteActivity
+import com.The12sMB.fundamentalsubmissionletsgo.ui.settings.SettingPreferences
+import com.The12sMB.fundamentalsubmissionletsgo.ui.settings.SettingsActivity
+import com.The12sMB.fundamentalsubmissionletsgo.ui.settings.SettingsViewModel
+import com.The12sMB.fundamentalsubmissionletsgo.ui.settings.SettingsViewModelFactory
+
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel by viewModels<MainViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,9 +52,21 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.isLoading.observe(this) {
             showLoading(it)
         }
+        val pref = SettingPreferences.getInstance(dataStore)
+        val settingsViewModel =
+            ViewModelProvider(this, SettingsViewModelFactory(pref))[SettingsViewModel::class.java]
+        settingsViewModel.getThemeSettings().observe(this)
+        { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
         supportActionBar?.title = "Github User App"
     }
+
     //search fitur
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
@@ -75,6 +97,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.favorite) {
             val intent = Intent(this, FavoriteActivity::class.java)
+            startActivity(intent)
+        } else if (item.itemId == R.id.settings) {
+            val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
         return super.onOptionsItemSelected(item)

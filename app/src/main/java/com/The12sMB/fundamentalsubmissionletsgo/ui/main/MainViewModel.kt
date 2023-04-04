@@ -1,6 +1,5 @@
 package com.The12sMB.fundamentalsubmissionletsgo.ui.main
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel : ViewModel() {
+class MainViewModel: ViewModel() {
     private val _githubuserdata = MutableLiveData<List<GithubUserResponse>>()
     val githubuserdata: LiveData<List<GithubUserResponse>> = _githubuserdata
 

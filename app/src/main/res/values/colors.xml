@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="github_primary">#161B22</color>
     <color name="github_secondary">#0D1117</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#0000FF</color>
 </resources>

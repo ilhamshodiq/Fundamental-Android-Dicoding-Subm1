@@ -24,11 +24,13 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var favoriteUser: FavoriteUser
 
-    private val detailViewModel by viewModels<DetailFavViewModel> {
+    private val detailFavViewModel by viewModels<DetailFavViewModel> {
         ViewModelFactory.getInstance(
             application
         )
     }
+
+    private var isFavorite: Boolean = false //cek user favorite
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +61,30 @@ class DetailActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-
-        //favorite
-
+        //set FAB ketika di click
+        binding.floatingActionButton3.apply {
+            setOnClickListener {
+                if (isFavorite) {
+                    detailFavViewModel.delete(favoriteUser)
+                    isFavorite = false
+                    setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this@DetailActivity,
+                            R.drawable.ic_favorite_border
+                        )
+                    )
+                } else {
+                    detailFavViewModel.insert(favoriteUser)
+                    isFavorite = true
+                    setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this@DetailActivity,
+                            R.drawable.ic_favorite
+                        )
+                    )
+                }
+            }
+        }
 
         supportActionBar?.elevation = 0f
 
@@ -89,27 +112,26 @@ class DetailActivity : AppCompatActivity() {
             item.id.toString(), item.login, item.avatarUrl,
             item.htmlUrl
         )
-        detailViewModel.isFav(favoriteUser.userId).observe(this) {
+        //observe untuk set fav FAB
+        detailFavViewModel.isFav(favoriteUser.userId).observe(this) {
             setFavUser(it)
         }
     }
 
     private fun setFavUser(value: Boolean) {
-        binding.floatingActionButton3.setOnClickListener {
+        binding.floatingActionButton3.apply {
             if (value) {
-                detailViewModel.delete(favoriteUser)
-                binding.floatingActionButton3.setImageDrawable(
+                setImageDrawable(
                     ContextCompat.getDrawable(
-                        this,
-                        R.drawable.ic_favorite_border
+                        this@DetailActivity,
+                        R.drawable.ic_favorite
                     )
                 )
             } else {
-                detailViewModel.insert(favoriteUser)
-                binding.floatingActionButton3.setImageDrawable(
+                setImageDrawable(
                     ContextCompat.getDrawable(
-                        this,
-                        R.drawable.ic_favorite
+                        this@DetailActivity,
+                        R.drawable.ic_favorite_border
                     )
                 )
             }

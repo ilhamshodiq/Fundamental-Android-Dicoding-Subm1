@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FundamentalSubmission1Letsgo</string>
+    <string name="app_name">Github User App</string>
     <string name="search">search</string>
     <string name="search_hint">Cari Github User!</string>
     <string name="tab_text_1">Follower</string>
@@ -8,4 +8,6 @@
     <string name="following">Following</string>
     <string name="fab">FAB</string>
     <string name="fav">favorite</string>
+    <string name="dark_mode">dark mode</string>
+    <string name="settings">settings</string>
 </resources>
