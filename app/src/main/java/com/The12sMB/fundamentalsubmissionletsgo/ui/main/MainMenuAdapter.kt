@@ -1,4 +1,4 @@
-package com.The12sMB.fundamentalsubmission1letsgo
+package com.The12sMB.fundamentalsubmissionletsgo.ui.main
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,13 +6,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.The12sMB.fundamentalsubmission1letsgo.databinding.ItemCardviewGithubuserBinding
+import com.The12sMB.fundamentalsubmissionletsgo.GithubUserResponse
+import com.The12sMB.fundamentalsubmissionletsgo.databinding.ItemCardviewGithubuserBinding
+import com.The12sMB.fundamentalsubmissionletsgo.ui.detail.DetailActivity
 import com.bumptech.glide.Glide
 
 class MainMenuAdapter(private val listGithubUser: List<GithubUserResponse>) :
     RecyclerView.Adapter<MainMenuAdapter.ViewHolder>() {
 
-    class ViewHolder(private  var binding: ItemCardviewGithubuserBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(binding: ItemCardviewGithubuserBinding) : RecyclerView.ViewHolder(binding.root) {
         val imgGithubuserPhoto: ImageView = binding.githubuserProfile
         val tvUsername: TextView = binding.tvUsername
         val tvUrl: TextView = binding.tvHtmlurl

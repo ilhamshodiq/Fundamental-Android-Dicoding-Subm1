@@ -6,4 +6,6 @@
     <string name="tab_text_2">Following</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="fab">FAB</string>
+    <string name="fav">favorite</string>
 </resources>

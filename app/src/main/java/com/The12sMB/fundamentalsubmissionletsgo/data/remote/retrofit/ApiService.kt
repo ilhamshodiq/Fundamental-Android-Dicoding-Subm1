@@ -1,8 +1,8 @@
-package com.The12sMB.fundamentalsubmission1letsgo.apis
+package com.The12sMB.fundamentalsubmissionletsgo.data.remote.retrofit
 
-import com.The12sMB.fundamentalsubmission1letsgo.GithubUserDetail
-import com.The12sMB.fundamentalsubmission1letsgo.GithubUserResponse
-import com.The12sMB.fundamentalsubmission1letsgo.GithubUserSearchResponse
+import com.The12sMB.fundamentalsubmissionletsgo.GithubUserDetail
+import com.The12sMB.fundamentalsubmissionletsgo.GithubUserResponse
+import com.The12sMB.fundamentalsubmissionletsgo.GithubUserSearchResponse
 import retrofit2.Call
 import retrofit2.http.*
 

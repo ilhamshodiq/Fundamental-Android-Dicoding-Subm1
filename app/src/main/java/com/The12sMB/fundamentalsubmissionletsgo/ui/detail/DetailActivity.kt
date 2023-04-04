@@ -1,4 +1,4 @@
-package com.The12sMB.fundamentalsubmission1letsgo
+package com.The12sMB.fundamentalsubmissionletsgo.ui.detail
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -6,8 +6,14 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
-import com.The12sMB.fundamentalsubmission1letsgo.databinding.ActivityDetailBinding
+import com.The12sMB.fundamentalsubmissionletsgo.GithubUserDetail
+import com.The12sMB.fundamentalsubmissionletsgo.R
+import com.The12sMB.fundamentalsubmissionletsgo.data.local.entity.FavoriteUser
+import com.The12sMB.fundamentalsubmissionletsgo.databinding.ActivityDetailBinding
+import com.The12sMB.fundamentalsubmissionletsgo.ui.ViewModelFactory
+import com.The12sMB.fundamentalsubmissionletsgo.ui.main.MainViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -15,6 +21,14 @@ import com.google.android.material.tabs.TabLayoutMediator
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private val mainViewModel by viewModels<MainViewModel>()
+
+    private lateinit var favoriteUser: FavoriteUser
+
+    private val detailViewModel by viewModels<DetailFavViewModel> {
+        ViewModelFactory.getInstance(
+            application
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +58,11 @@ class DetailActivity : AppCompatActivity() {
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
+
+
+        //favorite
+
+
         supportActionBar?.elevation = 0f
 
         supportActionBar?.title = StringBuilder("Detail: ").append(login)
@@ -65,6 +84,35 @@ class DetailActivity : AppCompatActivity() {
             Glide.with(this@DetailActivity)
                 .load(item.avatarUrl)
                 .into(civProfile)
+        }
+        favoriteUser = FavoriteUser(
+            item.id.toString(), item.login, item.avatarUrl,
+            item.htmlUrl
+        )
+        detailViewModel.isFav(favoriteUser.userId).observe(this) {
+            setFavUser(it)
+        }
+    }
+
+    private fun setFavUser(value: Boolean) {
+        binding.floatingActionButton3.setOnClickListener {
+            if (value) {
+                detailViewModel.delete(favoriteUser)
+                binding.floatingActionButton3.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.ic_favorite_border
+                    )
+                )
+            } else {
+                detailViewModel.insert(favoriteUser)
+                binding.floatingActionButton3.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.ic_favorite
+                    )
+                )
+            }
         }
     }
 

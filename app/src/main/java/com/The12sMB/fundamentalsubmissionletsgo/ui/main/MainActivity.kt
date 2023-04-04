@@ -1,9 +1,11 @@
-package com.The12sMB.fundamentalsubmission1letsgo
+package com.The12sMB.fundamentalsubmissionletsgo.ui.main
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -11,7 +13,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.The12sMB.fundamentalsubmission1letsgo.databinding.ActivityMainBinding
+import com.The12sMB.fundamentalsubmissionletsgo.GithubUserResponse
+import com.The12sMB.fundamentalsubmissionletsgo.R
+import com.The12sMB.fundamentalsubmissionletsgo.databinding.ActivityMainBinding
+import com.The12sMB.fundamentalsubmissionletsgo.ui.favorite.FavoriteActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -65,6 +70,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.favorite) {
+            val intent = Intent(this, FavoriteActivity::class.java)
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun showLoading(state: Boolean) {

@@ -1,4 +1,4 @@
-package com.The12sMB.fundamentalsubmission1letsgo
+package com.The12sMB.fundamentalsubmissionletsgo
 
 import org.junit.Test
 

@@ -1,6 +1,6 @@
-package com.The12sMB.fundamentalsubmission1letsgo.apis
+package com.The12sMB.fundamentalsubmissionletsgo.data.remote.retrofit
 
-import com.The12sMB.fundamentalsubmission1letsgo.BuildConfig
+import com.The12sMB.fundamentalsubmissionletsgo.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

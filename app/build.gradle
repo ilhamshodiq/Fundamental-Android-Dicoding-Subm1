@@ -1,14 +1,16 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
-    namespace 'com.The12sMB.fundamentalsubmission1letsgo'
+    namespace 'com.The12sMB.fundamentalsubmissionletsgo'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.The12sMB.fundamentalsubmission1letsgo"
+        applicationId "com.The12sMB.fundamentalsubmissionletsgo"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -57,4 +59,9 @@ dependencies {
     implementation "androidx.activity:activity-ktx:1.7.0" //ktx
     implementation 'com.google.android.material:material:1.8.0'
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.room:room-runtime:2.5.1'
+    kapt 'androidx.room:room-compiler:2.5.1'
 }

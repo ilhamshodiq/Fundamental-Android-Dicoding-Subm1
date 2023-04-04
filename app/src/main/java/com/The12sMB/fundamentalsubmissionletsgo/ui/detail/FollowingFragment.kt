@@ -1,4 +1,4 @@
-package com.The12sMB.fundamentalsubmission1letsgo
+package com.The12sMB.fundamentalsubmissionletsgo.ui.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.The12sMB.fundamentalsubmission1letsgo.databinding.FragmentFollowBinding
+import com.The12sMB.fundamentalsubmissionletsgo.GithubUserResponse
+import com.The12sMB.fundamentalsubmissionletsgo.R
+import com.The12sMB.fundamentalsubmissionletsgo.databinding.FragmentFollowBinding
+import com.The12sMB.fundamentalsubmissionletsgo.ui.main.MainMenuAdapter
+import com.The12sMB.fundamentalsubmissionletsgo.ui.main.MainViewModel
 
 class FollowingFragment : Fragment() {
     private lateinit var binding: FragmentFollowBinding

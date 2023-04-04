@@ -1,10 +1,14 @@
-package com.The12sMB.fundamentalsubmission1letsgo
+package com.The12sMB.fundamentalsubmissionletsgo.ui.main
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.The12sMB.fundamentalsubmission1letsgo.apis.ApiConfig
+import com.The12sMB.fundamentalsubmissionletsgo.GithubUserDetail
+import com.The12sMB.fundamentalsubmissionletsgo.GithubUserResponse
+import com.The12sMB.fundamentalsubmissionletsgo.GithubUserSearchResponse
+import com.The12sMB.fundamentalsubmissionletsgo.data.remote.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,10 +28,6 @@ class MainViewModel : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
-
-    companion object {
-        private const val TAG = "MainViewModel"
-    }
 
     init {
         //random huruf
@@ -128,6 +128,10 @@ class MainViewModel : ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
+    }
+
+    companion object {
+        private const val TAG = "MainViewModel"
     }
 
 }
